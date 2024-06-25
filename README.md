@@ -12,7 +12,7 @@ Sebelum memulai, pastikan Anda telah menginstal perangkat-perangkat berikut:
 1. **Clone repositori ini:**
 
     ```bash
-    git clone https://github.com/username/repo-name.git
+    git clone https://github.com/mmyusuf48/technical-test-happy-homes-beck-end
     cd repo-name
     ```
 

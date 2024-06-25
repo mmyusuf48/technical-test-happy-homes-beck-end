@@ -3,8 +3,8 @@ const sqlString = require('../../utils/converter/sqlString');
 
 const tableName = 'kegiatan';
 const primaryKey = 'id';
+
 const fields = [
-  'id',
   'start_date',
   'end_date',
   'start_time',
@@ -14,7 +14,7 @@ const fields = [
   'user_rate_id'
 ];
 
-const getData = async ({ keyword, user_rate_id }) => {
+const getData = async ({ user_rate_id }) => {
 
   const SQLQuery = `
   SELECT
@@ -31,8 +31,6 @@ const getData = async ({ keyword, user_rate_id }) => {
     kegiatan.is_delete = 0
     AND kegiatan.user_rate_id = ?
 `;
-
-
 
   const countQuery = `
   SELECT COUNT(*) AS total
@@ -76,6 +74,15 @@ const createData = (body) => {
   return dbPool.execute(SQLQuery);
 }
 
+const updateData = (body, id) => {
+  const includeFields = [];
+
+  const values = sqlString.convertUpdateFieldValue({ fields, includeFields, body });
+  const SQLQuery = `UPDATE ${tableName} SET ${values} WHERE ${primaryKey} = ?`;
+
+  return dbPool.execute(SQLQuery, [id]);
+}
+
 const deleteData = (id) => {
   const SQLQuery = `UPDATE ${tableName} SET is_delete='1' WHERE ${primaryKey}='${id}'`;
 
@@ -92,5 +99,6 @@ module.exports = {
   getData,
   createData,
   getDataByName,
+  updateData,
   deleteData
 }

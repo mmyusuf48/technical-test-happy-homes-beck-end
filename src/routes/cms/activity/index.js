@@ -10,6 +10,8 @@ router.post('/', ActivityController.useCreate);
 // READ - GET
 router.get('/', ActivityController.useGet);
 
+router.put('/:id', ActivityController.useUpdate);
+
 router.delete('/:id', ActivityController.useDelete);
 
 module.exports = router;

@@ -90,6 +90,42 @@ const useCreate = async (req, res) => {
   }
 }
 
+const useUpdate = async (req, res) => {
+  const { id } = req.params;
+  const { body } = req;
+
+  const validationKey = [
+    'start_date:string',
+    'end_date:string',
+    'start_time:string',
+    'end_time:string',
+    'activity:string',
+    'project_id:string',
+    'user_rate_id:string',
+  ];
+
+  const validated = validation.postValidation(req, validationKey);
+
+  if (validated) {
+    return res.status(validated.status).json(validated)
+  }
+
+  try {
+    await defaultModel.updateData(body, id);
+    response.defaultResponse({
+      res,
+      status: 200,
+      message: `Success update ${serviceName}`,
+      data: {
+        id_user: id,
+        ...body
+      },
+    });
+  } catch (error) {
+    response.responseErrorServer(res, error);
+  }
+}
+
 const useDelete = async (req, res) => {
   const { id } = req.params;
 
@@ -104,5 +140,6 @@ const useDelete = async (req, res) => {
 module.exports = {
   useGet,
   useCreate,
+  useUpdate,
   useDelete
 }
