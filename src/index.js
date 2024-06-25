@@ -23,6 +23,18 @@ app.use('/authentication', authenticationRoutes);
 const usersRoutes = require('./routes/cms/users');
 app.use('/cms/users', usersRoutes);
 
+// route cms project
+const projectRoutes = require('./routes/cms/project');
+app.use('/cms/project', projectRoutes);
+
+// route cms user rate
+const userRateRoutes = require('./routes/cms/user-rate');
+app.use('/cms/user-rate', userRateRoutes);
+
+// route cms user rate
+const activityRoutes = require('./routes/cms/activity');
+app.use('/cms/activity', activityRoutes);
+
 // route cms roles
 const rolesRoutes = require('./routes/cms/roles');
 app.use('/cms/roles', rolesRoutes);

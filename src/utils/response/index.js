@@ -11,6 +11,20 @@ const defaultResponse = ({ res, status, message = null, messageUser = null, data
   res.status(status).json(payload);
 }
 
+const kegiatanResponse = ({ res, status, message = null, messageUser = null, data = null, meta = null, user_rate = null }) => {
+  const payload = {
+    status,
+    message,
+    messageUser,
+    data,
+    user_rate
+  }
+
+  if (meta !== null) payload.meta = meta;
+
+  res.status(status).json(payload);
+}
+
 const responseLocal = ({ status, message, messageUser = '' }) => {
   return {
     status,
@@ -31,4 +45,5 @@ module.exports = {
   responseErrorServer,
   responseLocal,
   defaultResponse,
+  kegiatanResponse
 };
